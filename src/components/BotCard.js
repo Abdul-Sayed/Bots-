@@ -69,6 +69,10 @@ const BotCard = props => {
             <i className="icon shield" />
             {props.armor}
           </span>
+
+          <span style={{ marginLeft: '2rem' }}>
+
+          </span>
         </div>
       </div>
     </div>

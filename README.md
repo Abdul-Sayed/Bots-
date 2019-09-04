@@ -37,23 +37,9 @@ Work on fetching data from this API: https://bot-battler-api.herokuapp.com/api/v
 }
 ```
 
-#### 4. Refactor
-
-Now that you have some of the functionality of your app, it's time to refactor the code. Rather than enlisting the bot into the army, clicking on the card should instead display a show view (`BotSpecs`) for that bot, which should replace `YourBotArmy`. BotSpecs should have two buttons: one to go back to the list view and another to enlist that bot.
-
-This refactored version should look like the following:
-
-![alt text][full_demo]
-
-[full_demo]: ./public/full_demo.gif "Full demo"
-
 #### BONUS
 
 If you have finished all of the above features before time is called, consider building out an extra feature. This could a sort, a filter, or a search. This deliverable is entirely optional, so do not feel pressure to meet this goal.
-
-## Finishing up
-
-When time is called, please stop coding, push your code to your fork, and submit a pull request from Github. If you have any clarifying questions during or after the code challenge, please feel free to ask your instructor.
 
 ## Criteria
 

@@ -8,7 +8,8 @@ class BotsPage extends React.Component {
   state = {
     botList: [],
     botArmyList: [],
-    showBotSpec: false
+    showBotSpec: false,
+    currentBot: {}
   }
 
   componentDidMount() {
@@ -19,9 +20,15 @@ class BotsPage extends React.Component {
 
   addBotToArmy = (bot) => {
 
+    const removedDuplicates = [...this.state.botArmyList, bot].filter((bot, pos, arr) => {
+      return arr.map(mapObj => mapObj["id"]).indexOf(bot["id"]) === pos;
+    });
+
     this.setState({
-      botArmyList: Array.from(new Set([...this.state.botArmyList, bot]))
+      botArmyList: removedDuplicates
+      // botArmyList: [...new Set([...this.state.botArmyList, bot])]
     })
+
   }
 
   deleteBotFromArmy = (deletedBot) => {
@@ -34,29 +41,43 @@ class BotsPage extends React.Component {
 
   }
 
-  showBotSpec = () => {
+  showBotSpec = (bot) => {
     this.setState({
       showBotSpec: !this.state.showBotSpec
     })
+
+    this.setState({ currentBot: bot })
   }
 
   render() {
 
+    const conditionalRender =
+      this.state.showBotSpec ?
+        <BotSpecs
+          {...this.state.currentBot}
+          returnToCollection={this.showBotSpec}
+          addToArmy={this.addBotToArmy}
+        /> :
+        (
+          <React.Fragment>
+            <YourBotArmy
+              botArmyList={this.state.botArmyList}
+              handleClick={this.deleteBotFromArmy}
+            />
+
+            <BotCollection
+              botList={this.state.botList}
+              // handleClick={this.addBotToArmy}
+              handleClick={this.showBotSpec}
+            />
+          </React.Fragment>
+        )
+
+
+
     return (
       <React.Fragment>
-
-        <YourBotArmy
-          botArmyList={this.state.botArmyList}
-          handleClick={this.deleteBotFromArmy}
-        />
-
-        <BotCollection
-          botList={this.state.botList}
-          // handleClick={this.addBotToArmy}
-          handleClick={this.showBotSpec}
-        />
-
-
+        {conditionalRender}
       </React.Fragment>
     );
   }
